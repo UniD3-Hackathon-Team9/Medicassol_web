@@ -12,15 +12,36 @@ export const Container = styled.div`
   padding: 20px;
 `;
 
-export const Logs = styled.div`
-  width: 100%;
-  height: 200px;
-  border: 1px solid black;
+export const SomeInfoItem = styled.div`
+  margin-left: 10px;
+  display: inline;
+`;
+
+export const SomeInfo = styled.div`
+  width: 30%;
+  height: 70%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+`;
+
+export const Writings = styled.div`
+  border: 1px solid black;
+  width: 100%;
+`;
+
+export const GetInfo = styled.div`
+  width: 100%;
+  height: 70%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
-  font-size: 20px;
-  margin-bottom: 10px;
+  padding: 20px;
+  border: 1px solid black;
+`;
+
+export const Write = styled.div`
+  color: black;
 `;
 
 export const DoctorBox = styled.form`
@@ -32,30 +53,6 @@ export const DoctorBox = styled.form`
   align-items: center;
   padding: 10px;
   margin-bottom: 10px;
-`;
-
-export const SubmmitBtn = styled.button`
-  margin-top: -10px;
-  width: 50%;
-  height: 40px;
-
-  background-color: #4caf50;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: #45a049;
-  }
-`;
-
-export const DoctorText = styled.textarea`
-  width: 100%;
-  height: 120px;
-  border: 1px solid black;
-  margin-top: 10px;
-  resize: none;
-  padding: 10px;
 `;
 
 export const PatientMessage = styled.div`
