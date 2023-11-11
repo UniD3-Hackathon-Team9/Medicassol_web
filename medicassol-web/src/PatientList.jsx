@@ -9,6 +9,8 @@ import {
   Button,
   AddButtonContainer,
   PatientContainer,
+  Tbody,
+  EntireScreen,
 } from "./PatientList.style";
 
 const PatientList = () => {
@@ -60,20 +62,17 @@ const PatientList = () => {
 
   return (
     <>
-      <PatientContainer>
         <AddButtonContainer>
           <Button onClick={addPatient}>환자 정보 추가</Button>
           <Button onClick={savePatient}>저장하기</Button>
         </AddButtonContainer>
+        <PatientContainer>
         <Table>
-          <thead>
             <tr>
               {Object.keys(newPatient).map((columnName) => (
                 <Th key={columnName}>{columnName}</Th>
               ))}
             </tr>
-          </thead>
-          <tbody>
             {patients.map((patient, index) => (
               <tr key={index}>
                 {Object.keys(newPatient).map((columnName) => (
@@ -100,7 +99,6 @@ const PatientList = () => {
                 </Td>
               ))}
             </tr>
-          </tbody>
         </Table>
       </PatientContainer>
     </>

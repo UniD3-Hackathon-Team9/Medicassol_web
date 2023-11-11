@@ -3,18 +3,18 @@
 import styled from "styled-components";
 
 export const PatientContainer = styled.div`
-margin-top: 100px;
 border: 1px solid;
 width: 40%;
-height: 100%;
+height: 85vh;
 float: right;
-}
+overflow-y: auto; // 세로 스크롤 적용
+overflow-x: hidden; // 가로 스크롤 숨김
+
 `;
 
 export const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
 `;
 
 export const Th = styled.th`
@@ -22,6 +22,8 @@ export const Th = styled.th`
   padding: 8px;
   text-align: left;
   background-color: #f2f2f2;
+  position: sticky;
+  top:0px;
 `;
 
 export const Td = styled.td`
