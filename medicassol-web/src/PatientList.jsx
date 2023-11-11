@@ -9,6 +9,8 @@ import {
   Button,
   AddButtonContainer,
   PatientContainer,
+  Tbody,
+  EntireScreen,
 } from "./PatientList.style";
 
 const PatientList = () => {
@@ -21,6 +23,7 @@ const PatientList = () => {
     보호자번호: "",
     입원병동호수: "",
     입원과: "",
+    담당간호사: "",
   });
 
   const handleInputChange = (e) => {
@@ -41,6 +44,7 @@ const PatientList = () => {
       보호자번호: "",
       입원병동호수: "",
       입원과: "",
+      담당간호사: "",
     });
   };
 
@@ -54,26 +58,24 @@ const PatientList = () => {
       보호자번호: "",
       입원병동호수: "",
       입원과: "",
+      담당간호사: "",
     });
     alert("저장되었습니다.");
   };
 
   return (
     <>
-      <PatientContainer>
         <AddButtonContainer>
-          <Button onClick={addPatient}>환자 정보 추가</Button>
+          <Button onClick={addPatient}>입원하기</Button>
           <Button onClick={savePatient}>저장하기</Button>
         </AddButtonContainer>
+        <PatientContainer>
         <Table>
-          <thead>
             <tr>
               {Object.keys(newPatient).map((columnName) => (
                 <Th key={columnName}>{columnName}</Th>
               ))}
             </tr>
-          </thead>
-          <tbody>
             {patients.map((patient, index) => (
               <tr key={index}>
                 {Object.keys(newPatient).map((columnName) => (
@@ -100,7 +102,6 @@ const PatientList = () => {
                 </Td>
               ))}
             </tr>
-          </tbody>
         </Table>
       </PatientContainer>
     </>
