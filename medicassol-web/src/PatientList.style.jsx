@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 export const PatientContainer = styled.div`
 border: 1px solid;
-width: 40%;
+width: 50%;
 height: 85vh;
 float: right;
 overflow-y: auto; // 세로 스크롤 적용
