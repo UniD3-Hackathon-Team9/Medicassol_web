@@ -66,7 +66,7 @@ const PatientList = () => {
   return (
     <>
         <AddButtonContainer>
-          <Button onClick={addPatient}>환자 정보 추가</Button>
+          <Button onClick={addPatient}>입원하기</Button>
           <Button onClick={savePatient}>저장하기</Button>
         </AddButtonContainer>
         <PatientContainer>
