@@ -10,24 +10,7 @@ const response = {
   status: "200",
 };
 
-const fetchData = (patientIdx, option) => {
-  axios.get("https://server.medicassol.info/doctor/patient/history", {
-    params: {
-      patientIdx: patientIdx,
-      option: option
-    },
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${response.tokens.accessToken}`,
-    },
-  })
-  .then((response) => {
-    // 응답 처리
-  })
-  .catch((error) => {
-    console.error("에러:", error);
-  });
-};
+
 
 const Modal = ({onClose, show, setTableData, tableData}) => {
   const [medication, setMedication] = useState("");
@@ -96,10 +79,47 @@ const Modal = ({onClose, show, setTableData, tableData}) => {
 function Page2() {
   const [showModal, setModalShow] = useState(false);
   const [tableData, setTableData] = useState([]);
-  const [patientData, setPatientData] = useState([]);
+  const [patientData1, setPatientData1] = useState([]);
+  const [patientData2, setPatientData2] = useState([]);
 
+  const fetchData = (patientIdx, ) => {
+    axios.get("https://server.medicassol.info/doctor/patient/history", {
+      params: {
+        patientIdx: patientIdx,
+        option: 2
+      },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${response.tokens.accessToken}`,
+      },
+    })
+    .then((response) => {
+      setPatientData1(response.data.patientHistory);
+      console.log(response.data);
+    })
+    .catch((error) => {
+      console.error("에러:", error);
+    });
+    axios.get("https://server.medicassol.info/doctor/patient/history", {
+      params: {
+        patientIdx: patientIdx,
+        option: 1
+      },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${response.tokens.accessToken}`,
+      },
+    })
+    .then((response) => {
+      setPatientData2(response.data.patientHistory);
+      console.log(response.data);
+    })
+    .catch((error) => {
+      console.error("에러:", error);
+    });
+  };
   useEffect(() => {
-    fetchData(1,2);
+    fetchData(1);
   }, []);
 
   return (
@@ -122,7 +142,7 @@ function Page2() {
             <S.Th>투여할 약물이름</S.Th>
             <S.Th>약물투여완료여부</S.Th>
           </tr>
-          {patientData.map((entry, index) => (
+          {patientData1.map((entry, index) => (
             <tr key={index}>
               <S.Td>
                 {entry.willMedicateAt}
@@ -139,42 +159,14 @@ function Page2() {
             <S.Th>투여한 시간</S.Th>
             <S.Th>사용한 약물이름</S.Th>
           </tr>
-          <tr>
-            <S.Td>2023-02-11</S.Td>
-            <S.Td>ab</S.Td>
-          </tr>
-          <tr>
-            <S.Td>2023-02-11</S.Td>
-            <S.Td>ab</S.Td>
-          </tr>
-          <tr>
-            <S.Td>2023-02-11</S.Td>
-            <S.Td>ab</S.Td>
-          </tr>
-          <tr>
-            <S.Td>2023-02-11</S.Td>
-            <S.Td>ab</S.Td>
-          </tr>
-          <tr>
-            <S.Td>2023-02-11</S.Td>
-            <S.Td>ab</S.Td>
-          </tr>
-          <tr>
-            <S.Td>2023-02-11</S.Td>
-            <S.Td>ab</S.Td>
-          </tr>
-          <tr>
-            <S.Td>2023-02-11</S.Td>
-            <S.Td>ab</S.Td>
-          </tr>
-          <tr>
-            <S.Td>2023-02-11</S.Td>
-            <S.Td>ab</S.Td>
-          </tr>
-          <tr>
-            <S.Td>2023-02-11</S.Td>
-            <S.Td>ab</S.Td>
-          </tr>
+          {patientData2.map((entry, index) => (
+            <tr key={index}>
+              <S.Td>
+                {entry.willMedicateAt}
+              </S.Td>
+              <S.Td>{entry.mediName}</S.Td>
+            </tr>
+          ))}
         </S.Medic>
       </S.ScrollView>
     </S.PageContainer>
