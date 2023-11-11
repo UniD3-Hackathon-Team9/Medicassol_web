@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 150%;
+  width: 40%;
   height: 70%;
   display: flex;
   flex-direction: column;
@@ -50,13 +50,13 @@ export const Write = styled.div`
 
 export const DoctorBox = styled.form`
   width: 104%;
-  height: 700px;
+  height: 450px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
   margin-left: -5px;
 `;
 
