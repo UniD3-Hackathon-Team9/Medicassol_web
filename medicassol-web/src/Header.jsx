@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import * as S from "./Header.style";
+import LoginModal from "./LoginModal";
 
 function Header() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
   return (
     <>
       <S.Container>
@@ -10,13 +20,7 @@ function Header() {
         </S.Buttons>
 
         <S.Buttons>
-          <S.ButtonContent>간호기록</S.ButtonContent>
-        </S.Buttons>
-        <S.Buttons>
-          <S.ButtonContent>간호수행</S.ButtonContent>
-        </S.Buttons>
-        <S.Buttons>
-          <S.ButtonContent>수술 전 처치</S.ButtonContent>
+          <S.ButtonContent>기록업데이트</S.ButtonContent>
         </S.Buttons>
 
         <S.Buttons>
@@ -32,9 +36,11 @@ function Header() {
           <S.ButtonContent>검체등럭</S.ButtonContent>
         </S.Buttons>
         <S.Buttons>
-          <S.ButtonContent>나가기</S.ButtonContent>
+          <S.ButtonContent onClick={handleOpenModal}>나가기</S.ButtonContent>
         </S.Buttons>
       </S.Container>
+
+      {isModalOpen && <LoginModal onClose={handleCloseModal} />}
     </>
   );
 }

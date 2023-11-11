@@ -1,64 +1,67 @@
+// Page1.jsx
 import React, { useState } from "react";
 import * as S from "./Page1.style";
+import DoctorModal from "./DoctorModal";
 
 function Page1() {
-  const [userInput, setUserInput] = useState("");
   const [postedMessages, setPostedMessages] = useState([]);
-  const [showInput, setShowInput] = useState(false);
-
-  const handleInputChange = (e) => {
-    setUserInput(e.target.value);
-  };
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
   const handlePostMessage = () => {
-    if (userInput.trim() !== "") {
-      setPostedMessages([...postedMessages, userInput]);
-      setUserInput("");
-      setShowInput(false); // Hide the input area after posting a message
-    }
+    setPostedMessages([...postedMessages, modalMessage]);
+    setModalMessage("");
+    handleCloseModal();
   };
 
-  const handleShowInput = () => {
-    setShowInput(true);
+  const handleShowModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const handleModalInputChange = (message) => {
+    setModalMessage(message);
   };
 
   return (
     <>
       <S.Container>
         <S.DoctorBox>
-          <S.GetInfo>
-            <S.SomeInfo>
-              <S.SomeInfoItem>의사이름:</S.SomeInfoItem>
-              <S.SomeInfoItem>투약시간:</S.SomeInfoItem>
-              <S.SomeInfoItem>투약병명:</S.SomeInfoItem>
-            </S.SomeInfo>
-            {postedMessages.length > 0 && (
-              <S.Writings>
-                {postedMessages.map((message, index) => (
-                  <div key={index} className="message-item">
-                    {message}
-                  </div>
-                ))}
-              </S.Writings>
-            )}
-          </S.GetInfo>
+          <S.GetContent> {modalMessage}</S.GetContent>
 
-          {showInput && (
-            <S.Write>
-              <input
-                type="text"
-                placeholder="Type your message here"
-                value={userInput}
-                onChange={handleInputChange}
-              />
-              <button onClick={handlePostMessage}>더하기</button>
-            </S.Write>
+          {!showModal && (
+            <button
+              onClick={handleShowModal}
+              style={{
+                marginTop: "5px",
+                backgroundColor: "#4caf50",
+                color: "white",
+                border: "none",
+                borderRadius: "5px",
+                cursor: "pointer",
+                marginLeft: "25px",
+                transition: "background-color 0.3s",
+                ":active": {
+                  backgroundColor: "#45a049", // Darken the color on click
+                },
+              }}
+            >
+              추가소견 작성
+            </button>
           )}
-
-          {!showInput && <button onClick={handleShowInput}>Show Input</button>}
+          {showModal && (
+            <DoctorModal
+              onClose={handleCloseModal}
+              onSubmit={handlePostMessage}
+              onInputChange={handleModalInputChange}
+            />
+          )}
         </S.DoctorBox>
 
-        <S.PatientMessage> 서버한테 반환값 받아오기 </S.PatientMessage>
+        <S.PatientMessage></S.PatientMessage>
       </S.Container>
     </>
   );

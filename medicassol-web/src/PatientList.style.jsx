@@ -3,13 +3,14 @@
 import styled from "styled-components";
 
 export const PatientContainer = styled.div`
-border: 1px solid;
-width: 100%;
-height: 85vh;
-float: right;
-overflow-y: auto; // 세로 스크롤 적용
-overflow-x: hidden; // 가로 스크롤 숨김
-
+  border: 1px solid;
+  width: 80%;
+  height: 85vh;
+  float: right;
+  overflow-y: auto; // 세로 스크롤 적용
+  overflow-x: hidden; // 가로 스크롤 숨김
+  margin-top: 20px;
+  margin-left: 30px;
 `;
 
 export const Table = styled.table`
@@ -23,14 +24,14 @@ export const Th = styled.th`
   text-align: left;
   background-color: #f2f2f2;
   position: sticky;
-  top:0px;
-  font-size:12px;
+  top: 0px;
+  font-size: 12px;
 `;
 
 export const Td = styled.td`
   border: 1px solid #ddd;
   padding: 8px;
-  font-size:5px;
+  font-size: 5px;
 `;
 
 export const Input = styled.input`

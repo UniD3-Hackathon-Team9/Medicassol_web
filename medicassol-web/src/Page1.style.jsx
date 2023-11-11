@@ -1,15 +1,18 @@
-// Page1.style.js
-
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 100%;
+  width: 150%;
   height: 70%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  margin-top: 30px;
+  border: 2px solid #333;
+  border-radius: 5px;
+  padding: 7px;
 `;
+
 export const SomeInfo = styled.div`
   width: 100%;
   height: 70%;
@@ -24,14 +27,9 @@ export const SomeInfoItem = styled.div`
   display: inline;
 `;
 
-export const GetInfo = styled.div`
-  width: 60%;
-  height: 70%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  padding: 20px;
+export const GetContent = styled.text`
+  margin-left: 10px;
+  display: inline;
   border: 1px solid black;
 `;
 
@@ -51,20 +49,21 @@ export const Write = styled.div`
 `;
 
 export const DoctorBox = styled.form`
-  width: 100%;
-  height: 200px;
+  width: 104%;
+  height: 700px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
   margin-bottom: 10px;
+  margin-left: -5px;
 `;
 
 export const PatientMessage = styled.div`
-  border: 1px solid black;
-  width: 30%;
-  height: 80px;
+  width: 80%;
+  margin-right: -30px;
+  height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -72,4 +71,7 @@ export const PatientMessage = styled.div`
   background-color: #f2f2f2;
   padding: 10px;
   margin-bottom: 10px;
+  margin-left: -30px;
+  border: 2px solid #333;
+  border-radius: 5px;
 `;

@@ -10,8 +10,9 @@ root.render(
   <React.StrictMode>
     <div>
       <Header />
-      <div style={{ display: 'flex', flexDirection: 'row' }}>
+      <div style={{ display: "flex", flexDirection: "row" }}>
         <Page1 />
+
         <Page2 />
         <PatientList />
       </div>
