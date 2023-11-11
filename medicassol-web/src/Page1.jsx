@@ -1,7 +1,17 @@
 // Page1.jsx
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as S from "./Page1.style";
 import DoctorModal from "./DoctorModal";
+import axios from "axios";
+
+
+const response = {
+  tokens: {
+    accessToken:
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjoidGVzdDEyMzQiLCJ1c2VyVHlwZSI6ImRvY3RvciIsImlhdCI6MTY5OTczMzYwNiwiZXhwIjoxNzMxMjkxMjA2fQ.ybaU2jdQ2HIL97Z9oFFkH6_2sld-E8LU2KV8Vay-eWI",
+  },
+  status: "200",
+};
 
 function Page1() {
   const [postedMessages, setPostedMessages] = useState([]);
@@ -10,7 +20,9 @@ function Page1() {
 
   const handlePostMessage = () => {
     setPostedMessages([...postedMessages, modalMessage]);
+
     setModalMessage("");
+    
     handleCloseModal();
   };
 
@@ -24,7 +36,9 @@ function Page1() {
 
   const handleModalInputChange = (message) => {
     setModalMessage(message);
+    
   };
+
 
   return (
     <>
