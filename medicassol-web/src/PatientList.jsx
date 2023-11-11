@@ -1,6 +1,7 @@
 // PatientList.jsx
 
-import React, { useState } from "react";
+import React, {useState, useEffect} from "react";
+import axios from "axios";
 import {
   Table,
   Th,
@@ -11,91 +12,56 @@ import {
   PatientContainer,
 } from "./PatientList.style";
 
+const response = {
+  tokens: {
+    accessToken:
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjoidGVzdDEyMzQiLCJ1c2VyVHlwZSI6ImRvY3RvciIsImlhdCI6MTY5OTczMzYwNiwiZXhwIjoxNzMxMjkxMjA2fQ.ybaU2jdQ2HIL97Z9oFFkH6_2sld-E8LU2KV8Vay-eWI",
+  },
+  status: "200",
+};
+
 const PatientList = () => {
   const [patients, setPatients] = useState([]);
-  const [newPatient, setNewPatient] = useState({
-    환자이름: "",
-    환자ID: "",
-    나이: "",
-    성별: "",
-    보호자번호: "",
-    입원병동호수: "",
-    입원과: "",
-    담당간호사: "",
-  });
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setNewPatient((prevInfo) => ({
-      ...prevInfo,
-      [name]: value,
-    }));
-  };
-
-  const addPatient = () => {
-    setPatients((prevPatients) => [...prevPatients, newPatient]);
-    setNewPatient({
-      환자이름: "",
-      환자ID: "",
-      나이: "",
-      성별: "",
-      보호자번호: "",
-      입원병동호수: "",
-      입원과: "",
-      담당간호사: "",
+  useEffect(() => {
+    axios.get("https://server.medicassol.info/doctor/patient/list", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${response.tokens.accessToken}`,
+      },
+    })
+    .then((response) => {
+      console.log("서버 응답:", response.data.patientList); // 서버 응답 확인
+      setPatients(response.data.patientList); // 서버 응답을 patients 상태에 저장
+    })
+    .catch((error) => {
+      console.error("에러:", error);
     });
-  };
-
-  const savePatient = () => {
-    setPatients((prevPatients) => [...prevPatients, newPatient]);
-    setNewPatient({
-      환자이름: "",
-      환자ID: "",
-      나이: "",
-      성별: "",
-      보호자번호: "",
-      입원병동호수: "",
-      입원과: "",
-      담당간호사: "",
-    });
-    alert("저장되었습니다.");
-  };
+  }, []);
 
   return (
     <>
-        <PatientContainer>
+      <PatientContainer>
         <Table>
-            <tr>
-              {Object.keys(newPatient).map((columnName) => (
-                <Th key={columnName}>{columnName}</Th>
-              ))}
+          <tr>
+            <Th>환자 이름</Th>
+            <Th>환자 ID</Th>
+            <Th>나이</Th>
+            <Th>성별</Th>
+            <Th>보호자 번호</Th>
+            <Th>입원과</Th>
+            <Th>담당간호사</Th>
             </tr>
             {patients.map((patient, index) => (
-              <tr key={index}>
-                {Object.keys(newPatient).map((columnName) => (
-                  <Td key={columnName}>
-                    <Input
-                      type="text"
-                      name={columnName}
-                      value={patient[columnName]}
-                      onChange={handleInputChange}
-                    />
-                  </Td>
-                ))}
-              </tr>
-            ))}
-            <tr>
-              {Object.keys(newPatient).map((columnName) => (
-                <Td key={columnName}>
-                  <Input
-                    type="text"
-                    name={columnName}
-                    value={newPatient[columnName]}
-                    onChange={handleInputChange}
-                  />
-                </Td>
-              ))}
+            <tr key={index} value={patient}>
+              <Td>{patient.patientName}</Td>
+              <Td>{patient.patientIdx}</Td>
+              <Td>{patient.age}</Td>
+              <Td>{patient.gender}</Td>
+              <Td>{patient.guardianPhoneNumber}</Td>
+              <Td>{patient.bedInfo}</Td>
             </tr>
+          ))}
         </Table>
       </PatientContainer>
     </>

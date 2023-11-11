@@ -45,4 +45,31 @@ export const Th = styled.th`
 export const Td = styled.td`
   border: 1px solid #ccc;
   padding: 5px;
+  z-index: 1000; 
 `;
+
+export const Modal = styled.div`
+  position: fixed;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; 
+`;
+
+export const ModalContent = styled.div`
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  z-index: 1000; 
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+`;
+
+export const Close = styled.span`
+  float: right;
+  cursor: pointer;
+  z-index: 1000; 
+`;
+
