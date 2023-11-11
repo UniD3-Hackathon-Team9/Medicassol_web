@@ -1,17 +1,17 @@
+// DoctorModal.jsx
 import React, { useState } from "react";
 import * as S from "./DoctorModal.style";
 
-function DoctorModal({ onClose, onSubmit, onInputChange }) {
+function DoctorModal({ onClose, onSubmit }) {
   const [userInput, setUserInput] = useState("");
 
   const handleInputChange = (e) => {
     setUserInput(e.target.value);
-    onInputChange(e.target.value);
   };
 
   const handleSubmit = () => {
     if (userInput.trim() !== "") {
-      onSubmit();
+      onSubmit(userInput);
       setUserInput("");
       onClose();
     }

@@ -7,7 +7,7 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  margin-top: 30px;
+  margin-top: 14px;
   border: 2px solid #333;
   border-radius: 5px;
   padding: 7px;
@@ -30,7 +30,6 @@ export const SomeInfoItem = styled.div`
 export const GetContent = styled.text`
   margin-left: 10px;
   display: inline;
-  border: 1px solid black;
 `;
 
 export const Writings = styled.div`
@@ -53,7 +52,6 @@ export const DoctorBox = styled.form`
   height: 450px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
   padding: 10px;
   /* margin-bottom: 10px; */

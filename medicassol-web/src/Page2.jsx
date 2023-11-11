@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import * as S from "./Page2.style";
 import axios from "axios";
 
@@ -10,9 +10,7 @@ const response = {
   status: "200",
 };
 
-
-
-const Modal = ({onClose, show, setTableData, tableData}) => {
+const Modal = ({ onClose, show, setTableData, tableData }) => {
   const [medication, setMedication] = useState("");
   const [medicineIdx, setMedicineIdx] = useState("");
   const [date, setDate] = useState("");
@@ -27,7 +25,6 @@ const Modal = ({onClose, show, setTableData, tableData}) => {
     };
     axios
       .post("https://server.medicassol.info/doctor/medication", newEntry, {
-        
         headers: {
           Authorization: `Bearer ${response.tokens.accessToken}`,
         },
@@ -74,49 +71,49 @@ const Modal = ({onClose, show, setTableData, tableData}) => {
   );
 };
 
-
-
 function Page2() {
   const [showModal, setModalShow] = useState(false);
   const [tableData, setTableData] = useState([]);
   const [patientData1, setPatientData1] = useState([]);
   const [patientData2, setPatientData2] = useState([]);
 
-  const fetchData = (patientIdx, ) => {
-    axios.get("https://server.medicassol.info/doctor/patient/history", {
-      params: {
-        patientIdx: patientIdx,
-        option: 2
-      },
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${response.tokens.accessToken}`,
-      },
-    })
-    .then((response) => {
-      setPatientData1(response.data.patientHistory);
-      console.log(response.data);
-    })
-    .catch((error) => {
-      console.error("에러:", error);
-    });
-    axios.get("https://server.medicassol.info/doctor/patient/history", {
-      params: {
-        patientIdx: patientIdx,
-        option: 1
-      },
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${response.tokens.accessToken}`,
-      },
-    })
-    .then((response) => {
-      setPatientData2(response.data.patientHistory);
-      console.log(response.data);
-    })
-    .catch((error) => {
-      console.error("에러:", error);
-    });
+  const fetchData = (patientIdx) => {
+    axios
+      .get("https://server.medicassol.info/doctor/patient/history", {
+        params: {
+          patientIdx: patientIdx,
+          option: 2,
+        },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${response.tokens.accessToken}`,
+        },
+      })
+      .then((response) => {
+        setPatientData1(response.data.patientHistory);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("에러:", error);
+      });
+    axios
+      .get("https://server.medicassol.info/doctor/patient/history", {
+        params: {
+          patientIdx: patientIdx,
+          option: 1,
+        },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${response.tokens.accessToken}`,
+        },
+      })
+      .then((response) => {
+        setPatientData2(response.data.patientHistory);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("에러:", error);
+      });
   };
   useEffect(() => {
     fetchData(1);
@@ -126,7 +123,13 @@ function Page2() {
     <S.PageContainer>
       <S.Brain src="/images/brain.png"></S.Brain>
       <div>
-        <button onClick={() => setModalShow(true)}>투약정보작성</button>
+        <button
+          style={{ marginBottom: "3px" }}
+          onClick={() => setModalShow(true)}
+        >
+          투약정보작성
+        </button>
+
         <Modal
           onClose={() => setModalShow(false)}
           show={showModal}
@@ -144,9 +147,7 @@ function Page2() {
           </tr>
           {patientData1.map((entry, index) => (
             <tr key={index}>
-              <S.Td>
-                {entry.willMedicateAt}
-              </S.Td>
+              <S.Td>{entry.willMedicateAt}</S.Td>
               <S.Td>{entry.mediName}</S.Td>
               <S.Td>{entry.isDone}</S.Td>
             </tr>
@@ -161,9 +162,7 @@ function Page2() {
           </tr>
           {patientData2.map((entry, index) => (
             <tr key={index}>
-              <S.Td>
-                {entry.willMedicateAt}
-              </S.Td>
+              <S.Td>{entry.willMedicateAt}</S.Td>
               <S.Td>{entry.mediName}</S.Td>
             </tr>
           ))}

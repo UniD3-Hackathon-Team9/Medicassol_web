@@ -10,7 +10,7 @@ export const PatientContainer = styled.div`
   overflow-y: auto; // 세로 스크롤 적용
   overflow-x: hidden; // 가로 스크롤 숨김
   margin-top: 20px;
-  margin-left: 30px;
+  margin-left: 10px;
 `;
 
 export const Table = styled.table`
