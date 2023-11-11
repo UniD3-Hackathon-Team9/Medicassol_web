@@ -3,10 +3,19 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 30%;
+  width: 100%;
   height: 70%;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+`;
+export const SomeInfo = styled.div`
+  width: 100%;
+  height: 70%;
+  display: flex;
+  flex-direction: row;
   justify-content: space-around;
   align-items: center;
   padding: 20px;
@@ -17,27 +26,26 @@ export const SomeInfoItem = styled.div`
   display: inline;
 `;
 
-export const SomeInfo = styled.div`
+export const GetInfo = styled.div`
   width: 30%;
   height: 70%;
   display: flex;
   flex-direction: column;
-`;
-
-export const Writings = styled.div`
-  border: 1px solid black;
-  width: 100%;
-`;
-
-export const GetInfo = styled.div`
-  width: 100%;
-  height: 70%;
-  display: flex;
-  flex-direction: row;
   justify-content: space-around;
   align-items: center;
   padding: 20px;
   border: 1px solid black;
+`;
+
+export const Writings = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .message-item {
+    margin-bottom: 5px;
+    padding: 5px;
+  }
 `;
 
 export const Write = styled.div`
@@ -57,7 +65,7 @@ export const DoctorBox = styled.form`
 
 export const PatientMessage = styled.div`
   border: 1px solid black;
-  width: 100%;
+  width: 30%;
   height: 80px;
   display: flex;
   justify-content: center;

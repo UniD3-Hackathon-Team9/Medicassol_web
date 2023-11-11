@@ -35,7 +35,9 @@ function Page1() {
             {postedMessages.length > 0 && (
               <S.Writings>
                 {postedMessages.map((message, index) => (
-                  <div key={index}>{message}</div>
+                  <div key={index} className="message-item">
+                    {message}
+                  </div>
                 ))}
               </S.Writings>
             )}
