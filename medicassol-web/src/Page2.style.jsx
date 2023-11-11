@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const PageContainer = styled.div`
-  width: 100%;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;

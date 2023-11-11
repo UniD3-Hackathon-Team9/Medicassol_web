@@ -9,8 +9,6 @@ import {
   Button,
   AddButtonContainer,
   PatientContainer,
-  Tbody,
-  EntireScreen,
 } from "./PatientList.style";
 
 const PatientList = () => {
@@ -65,10 +63,6 @@ const PatientList = () => {
 
   return (
     <>
-        <AddButtonContainer>
-          <Button onClick={addPatient}>입원하기</Button>
-          <Button onClick={savePatient}>저장하기</Button>
-        </AddButtonContainer>
         <PatientContainer>
         <Table>
             <tr>
