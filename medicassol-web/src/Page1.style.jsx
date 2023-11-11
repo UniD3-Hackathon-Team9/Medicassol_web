@@ -9,7 +9,6 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  padding: 20px;
 `;
 export const SomeInfo = styled.div`
   width: 100%;
@@ -18,7 +17,6 @@ export const SomeInfo = styled.div`
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  padding: 20px;
 `;
 
 export const SomeInfoItem = styled.div`
@@ -27,7 +25,7 @@ export const SomeInfoItem = styled.div`
 `;
 
 export const GetInfo = styled.div`
-  width: 30%;
+  width: 60%;
   height: 70%;
   display: flex;
   flex-direction: column;
