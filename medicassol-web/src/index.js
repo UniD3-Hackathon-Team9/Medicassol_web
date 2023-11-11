@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-// import Header from "./Header";
-// import PatientList from "./PatientList";
+import Header from "./Header";
+import PatientList from "./PatientList";
 // import Page1 from "./Page1";
 import Page1 from "./Page1";
 
