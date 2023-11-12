@@ -20,7 +20,8 @@ const response = {
   status: "200",
 };
 
-const PatientList = () => {
+const PatientList = ({ onPatientSelect }) => {
+
   const [patients, setPatients] = useState([]);
 
   useEffect(() => {
@@ -55,7 +56,7 @@ const PatientList = () => {
             {patients.map((patient, index) => (
             <tr key={index} value={patient}>
               <Td>{patient.patientName}</Td>
-              <Td>{patient.patientIdx}</Td>
+              <Td><button onClick={()=>onPatientSelect(patient.patientIdx)}>{patient.patientIdx}</button></Td>
               <Td>{patient.age}</Td>
               <Td>{patient.gender}</Td>
               <Td>{patient.guardianPhoneNumber}</Td>

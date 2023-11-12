@@ -3,15 +3,15 @@ import React, { useState } from "react";
 import * as S from "./DoctorModal.style";
 import axios from "axios";
 
-const response = {
-  tokens: {
-    accessToken:
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjoidGVzdDEyMzQiLCJ1c2VyVHlwZSI6ImRvY3RvciIsImlhdCI6MTY5OTczMzYwNiwiZXhwIjoxNzMxMjkxMjA2fQ.ybaU2jdQ2HIL97Z9oFFkH6_2sld-E8LU2KV8Vay-eWI",
-  },
-  status: "200",
-};
-function DoctorModal({ onClose, onSubmit, onInputChange }) {
-  const [userInput, setUserInput] = useState("");
+  const response = {
+    tokens: {
+      accessToken:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiYWNjZXNzIiwidXNlcklkIjoidGVzdDEyMzQiLCJ1c2VyVHlwZSI6ImRvY3RvciIsImlhdCI6MTY5OTczMzYwNiwiZXhwIjoxNzMxMjkxMjA2fQ.ybaU2jdQ2HIL97Z9oFFkH6_2sld-E8LU2KV8Vay-eWI",
+    },
+    status: "200",
+  };
+  function DoctorModal({ patientId, onClose, onSubmit, onInputChange }) {
+    const [userInput, setUserInput] = useState("");
 
   const handleInputChange = (e) => {
     setUserInput(e.target.value);
@@ -22,7 +22,7 @@ function DoctorModal({ onClose, onSubmit, onInputChange }) {
       onSubmit(userInput);
 
       const userMessage = {
-        patientIdx: 1,
+        patientIdx: patientId,
         message: userInput,
       };
       axios
@@ -46,20 +46,21 @@ function DoctorModal({ onClose, onSubmit, onInputChange }) {
     }
   };
 
-  return (
-    <S.ModalContainer>
-      <S.ModalContent>
-        <input
-          type="text"
-          placeholder="Type your message here"
-          value={userInput}
-          onChange={handleInputChange}
-        />
-        <button onClick={handleSubmit}>추가하기</button>
-        <button onClick={onClose}>취소하기</button>
-      </S.ModalContent>
-    </S.ModalContainer>
-  );
-}
+    return (
+      <S.ModalContainer>
+        <S.ModalContent>
+          <input
+            type="text"
+            placeholder="Type your message here"
+            value={userInput}
+            onChange={handleInputChange}
+          />
+          <button onClick={handleSubmit}>추가하기</button>
+          <button onClick={onClose}>취소하기</button>
+        </S.ModalContent>
+      </S.ModalContainer>
+    );
+  }
+
 
 export default DoctorModal;

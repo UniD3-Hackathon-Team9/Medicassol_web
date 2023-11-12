@@ -12,6 +12,9 @@ function Header() {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
+  const handleRefreshPage = () => {
+    window.location.reload();
+  };
   return (
     <>
       <S.Container>
@@ -20,7 +23,7 @@ function Header() {
         </S.Buttons>
 
         <S.Buttons>
-          <S.ButtonContent>기록업데이트</S.ButtonContent>
+        <S.ButtonContent onClick={handleRefreshPage}>기록업데이트</S.ButtonContent>
         </S.Buttons>
 
         <S.Buttons>

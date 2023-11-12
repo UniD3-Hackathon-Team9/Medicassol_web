@@ -32,10 +32,9 @@ const Modal = ({ onClose, show, setTableData, tableData }) => {
         })
         .then((response) => {
           const { results } = response.data;
-          const medicineNames = results.map((medicine) => [
-            medicine.medicineIdx,
-            medicine.medicineName,
-          ]);
+          const medicineNames = results.map(
+            (medicine) => medicine.medicineName
+          );
 
           setMedicineList(medicineNames);
         })
@@ -61,7 +60,7 @@ const Modal = ({ onClose, show, setTableData, tableData }) => {
     setMedication(medicineName);
   };
 
-  const handleSubmit = (medicineIdx) => {
+  const handleSubmit = () => {
     const medicateAt = `${date} ${time}`; // 날짜와 시간 결합
     const newEntry = {
       patientIdx: 1,
@@ -118,18 +117,18 @@ const Modal = ({ onClose, show, setTableData, tableData }) => {
             {medicineList.length > 0 && (
               <div>
                 {medicineList.map(
-                  (index, medicineName) => (
+                  (medicineName, index) => (
                     <div
                       key={index}
                       onMouseOver={() => handleMouseOver(index)}
                       onMouseLeave={handleMouseLeave}
-                      onClick={() => handleClick(medicineName[1])}
+                      onClick={() => handleClick(medicineName)}
                       style={{
                         color: selectedMedicine === index ? "red" : "black",
                         cursor: "pointer",
                       }}
                     >
-                      {medicineName[1]}
+                      {medicineName}
                     </div>
                   )
                   // number= .medicineIdx;
@@ -138,7 +137,7 @@ const Modal = ({ onClose, show, setTableData, tableData }) => {
             )}
           </div>
         </div>
-        <S.RegiBtn onClick={handleSubmit(66)}>등록하기</S.RegiBtn>
+        <S.RegiBtn onClick={handleSubmit}>등록하기</S.RegiBtn>
       </S.ModalContent>
     </S.Modal>
   );
