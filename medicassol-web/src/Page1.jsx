@@ -1,7 +1,8 @@
 // Page1.jsx
-import React, { useState } from "react";
+import React, {useState, useEffect} from "react";
 import * as S from "./Page1.style";
 import DoctorModal from "./DoctorModal";
+import axios from "axios";
 
 const response = {
   tokens: {
@@ -15,9 +16,33 @@ function Page1() {
   const [postedMessages, setPostedMessages] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
+  const fetchMessages = (patientIdx) => {
+    axios
+      .get(
+        "https://server.medicassol.info/doctor/message",
+        {
+          params: { patientIdx:  1},
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${response.tokens.accessToken}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response.data);
+        setPostedMessages(response.data.doctorMessage); // 예시: 서버 응답이 messages 배열을 포함하고 있다고 가정
+      })
+      .catch((error) => {
+        console.error("에러:", error);
+      });
+  };
+
+  // 컴포넌트 마운트 시 데이터 로드
+  useEffect(() => {
+    fetchMessages(1);
+  }, []);
 
   const handlePostMessage = (message) => {
-    setPostedMessages([...postedMessages, message]);
     setModalMessage("");
     handleCloseModal();
   };
@@ -38,8 +63,8 @@ function Page1() {
     <>
       <S.Container>
         <S.DoctorBox>
-          {postedMessages.map((message, index) => (
-            <S.GetContent key={index}>{message}</S.GetContent>
+          {postedMessages.map((doctorMessage, index) => (
+            <S.GetContent key={index}>{doctorMessage.message}<br /> {doctorMessage.createdAt}<br /> <br /> </S.GetContent>
           ))}
         </S.DoctorBox>
         {!showModal && (
