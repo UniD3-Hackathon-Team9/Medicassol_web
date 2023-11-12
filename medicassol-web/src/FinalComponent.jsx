@@ -7,7 +7,7 @@ import Page2 from "./Page2";
 
 function FinalComponent() {
   // 여기서 useState를 호출
-  const [patientId, setPatientId] = useState();
+  const [patientId, setPatientId] = useState(1);
 
   const handlePatientSelect = (id) => {
     setPatientId(id);

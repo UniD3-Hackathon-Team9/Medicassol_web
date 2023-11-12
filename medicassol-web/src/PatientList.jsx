@@ -56,7 +56,7 @@ const PatientList = ({ onPatientSelect }) => {
             {patients.map((patient, index) => (
             <tr key={index} value={patient}>
               <Td>{patient.patientName}</Td>
-              <Td><button onClick={onPatientSelect(patient.patientIdx)}>{patient.patientIdx}</button></Td>
+              <Td><button onClick={()=>onPatientSelect(patient.patientIdx)}>{patient.patientIdx}</button></Td>
               <Td>{patient.age}</Td>
               <Td>{patient.gender}</Td>
               <Td>{patient.guardianPhoneNumber}</Td>
