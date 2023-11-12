@@ -15,22 +15,68 @@ const Modal = ({ onClose, show, setTableData, tableData }) => {
   const [medicineIdx, setMedicineIdx] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
+  const [medicineList, setMedicineList] = useState([]);
+  const [selectedMedicine, setSelectedMedicine] = useState(null);
 
-  const handleSubmit = () => {
+  useEffect(() => {
+    if (medication.trim() !== "") {
+      axios
+        .get("https://server.medicassol.info/doctor/search/medicine", {
+          headers: {
+            Authorization: "Bearer " + response.tokens.accessToken,
+            "Content-Type": "application/json",
+          },
+          params: {
+            keyword: medication,
+          },
+        })
+        .then((response) => {
+          const { results } = response.data;
+          const medicineNames = results.map((medicine) => [
+            medicine.medicineIdx,
+            medicine.medicineName,
+          ]);
+
+          setMedicineList(medicineNames);
+        })
+        .catch((error) => {
+          console.error("Error :", error);
+        });
+    } else {
+      setMedicineList([]);
+    }
+  }, [medication]);
+
+  const handleMouseOver = (index) => {
+    // Set the selected medicine on mouseover
+    setSelectedMedicine(index);
+  };
+
+  const handleMouseLeave = () => {
+    // Reset the selected medicine on mouseleave
+    setSelectedMedicine(null);
+  };
+
+  const handleClick = (medicineName, index) => {
+    setMedication(medicineName);
+  };
+
+  const handleSubmit = (medicineIdx) => {
     const medicateAt = `${date} ${time}`; // 날짜와 시간 결합
     const newEntry = {
-      patientIdx: 1, // 문자열을 정수로 변환
-      medicineIdx: 1,
+      patientIdx: 1,
+      medicineIdx: medicineIdx,
       medicateAt: medicateAt,
     };
     axios
       .post("https://server.medicassol.info/doctor/medication", newEntry, {
         headers: {
           Authorization: `Bearer ${response.tokens.accessToken}`,
+          "Content-Type": "application/json",
         },
       })
       .then((response) => {
-        console.log("POST 성공:", response);
+        console.log("POST 성공:", response.data);
         // 추가적인 작업 (예: 테이블 데이터 업데이트)
         setTableData([...tableData, newEntry]);
       })
@@ -47,6 +93,7 @@ const Modal = ({ onClose, show, setTableData, tableData }) => {
   return (
     <S.Modal>
       <S.ModalContent>
+        <S.Title>분은 10분단위로만 기입해주세요.</S.Title>
         <S.Close onClick={onClose}>&times;</S.Close>
         <input
           type="date"
@@ -59,13 +106,39 @@ const Modal = ({ onClose, show, setTableData, tableData }) => {
           onChange={(e) => setTime(e.target.value)}
           step="600" // 10분 단위로 설정
         />
-        <input
-          type="text"
-          placeholder="Medication Name"
-          value={medication}
-          onChange={(e) => setMedicineIdx(e.target.value)}
-        />
-        <button onClick={handleSubmit}>Submit</button>
+
+        <div>
+          <div>
+            <input
+              type="text"
+              placeholder="Medication Name"
+              value={medication}
+              onChange={(e) => setMedication(e.target.value)}
+            />
+            {medicineList.length > 0 && (
+              <div>
+                {medicineList.map(
+                  (index, medicineName) => (
+                    <div
+                      key={index}
+                      onMouseOver={() => handleMouseOver(index)}
+                      onMouseLeave={handleMouseLeave}
+                      onClick={() => handleClick(medicineName[1])}
+                      style={{
+                        color: selectedMedicine === index ? "red" : "black",
+                        cursor: "pointer",
+                      }}
+                    >
+                      {medicineName[1]}
+                    </div>
+                  )
+                  // number= .medicineIdx;
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+        <S.RegiBtn onClick={handleSubmit(66)}>등록하기</S.RegiBtn>
       </S.ModalContent>
     </S.Modal>
   );
@@ -124,7 +197,15 @@ function Page2() {
       <S.Brain src="/images/brain.png"></S.Brain>
       <div>
         <button
-          style={{ marginBottom: "3px" }}
+          style={{
+            marginBottom: "3px",
+            backgroundColor: "#4caf50",
+            color: "white",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer",
+            transition: "background-color 0.3s",
+          }}
           onClick={() => setModalShow(true)}
         >
           투약정보작성

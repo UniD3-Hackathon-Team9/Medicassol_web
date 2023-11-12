@@ -46,7 +46,7 @@ function Page1() {
           <button
             onClick={handleShowModal}
             style={{
-              marginTop: "5px",
+              marginBottom: "5px",
               backgroundColor: "#4caf50",
               color: "white",
               border: "none",

@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   width: 100%;
   height: 60px;
-  border-bottom: 2px solid #333;
+  border-bottom: 2px solid #d2d2d2;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -11,7 +11,7 @@ export const Container = styled.div`
 `;
 
 export const Buttons = styled.div`
-  border: 2px solid #333;
+  border: 2px solid #d2d2d2;
   border-radius: 5px;
   display: flex;
   justify-content: center;

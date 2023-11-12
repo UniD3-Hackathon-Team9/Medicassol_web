@@ -11,6 +11,8 @@ export const PatientContainer = styled.div`
   overflow-x: hidden; // 가로 스크롤 숨김
   margin-top: 20px;
   margin-left: 10px;
+  border: 2px solid #d2d2d2;
+  border-radius: 5px;
 `;
 
 export const Table = styled.table`

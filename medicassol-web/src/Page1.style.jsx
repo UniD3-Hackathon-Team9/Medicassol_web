@@ -8,7 +8,7 @@ export const Container = styled.div`
   justify-content: space-around;
   align-items: center;
   margin-top: 14px;
-  border: 2px solid #333;
+  border: 2px solid #d2d2d2;
   border-radius: 5px;
   padding: 7px;
 `;
@@ -66,10 +66,10 @@ export const PatientMessage = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 16px;
-  background-color: #f2f2f2;
+  background-color: #ffffff;
   padding: 10px;
   margin-bottom: 10px;
   margin-left: -30px;
-  border: 2px solid #333;
+  border: 2px solid #d2d2d2;
   border-radius: 5px;
 `;

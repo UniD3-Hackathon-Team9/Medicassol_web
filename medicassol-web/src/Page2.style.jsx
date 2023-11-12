@@ -23,7 +23,6 @@ export const Medic = styled.table`
 `;
 
 export const ScrollView = styled.div`
-  border: 1px solid #ccc;
   width: 400px;
   height: 25vh;
   margin-bottom: 20px;
@@ -47,15 +46,15 @@ export const Td = styled.td`
 
 export const Modal = styled.div`
   position: fixed;
-  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  z-index: 100;
 `;
 
 export const ModalContent = styled.div`
@@ -66,11 +65,26 @@ export const ModalContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: 300px;
+`;
+
+export const Title = styled.span`
+  margin-left: 10px;
 `;
 
 export const Close = styled.span`
   align-self: flex-end;
   cursor: pointer;
+  margin-top: -30px;
+`;
+
+export const RegiBtn = styled.button`
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 `;
 
 export const Button = styled.button`
@@ -87,10 +101,6 @@ export const Input = styled.input`
   border: 1px solid #ccc;
   border-radius: 5px;
   margin-bottom: 10px;
-`;
-
-export const SubmitButton = styled(Button)`
-  background-color: #28a745;
 `;
 
 export const StyledForm = styled.form`
