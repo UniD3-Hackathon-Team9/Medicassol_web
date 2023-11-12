@@ -10,7 +10,7 @@ import axios from "axios";
     },
     status: "200",
   };
-  function DoctorModal({ onClose, onSubmit, onInputChange }) {
+  function DoctorModal({ patientId, onClose, onSubmit, onInputChange }) {
     const [userInput, setUserInput] = useState("");
 
   const handleInputChange = (e) => {
@@ -22,7 +22,7 @@ import axios from "axios";
       onSubmit(userInput);
 
       const userMessage = {
-        patientIdx: 1,
+        patientIdx: patientId,
         message: userInput,
       };
       axios

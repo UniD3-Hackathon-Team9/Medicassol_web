@@ -10,7 +10,7 @@ const response = {
   status: "200",
 };
 
-const Modal = ({ onClose, show, setTableData, tableData }) => {
+const Modal = ({ patientId, onClose, show, setTableData, tableData }) => {
   const [medication, setMedication] = useState("");
   const [medicineIdx, setMedicineIdx] = useState("");
   const [date, setDate] = useState("");
@@ -19,7 +19,7 @@ const Modal = ({ onClose, show, setTableData, tableData }) => {
   const handleSubmit = () => {
     const medicateAt = `${date} ${time}`; // 날짜와 시간 결합
     const newEntry = {
-      patientIdx: 1, // 문자열을 정수로 변환
+      patientIdx: patientId, // 문자열을 정수로 변환
       medicineIdx: 1,
       medicateAt: medicateAt,
     };
@@ -71,17 +71,17 @@ const Modal = ({ onClose, show, setTableData, tableData }) => {
   );
 };
 
-function Page2() {
+function Page2({patientId}) {
   const [showModal, setModalShow] = useState(false);
   const [tableData, setTableData] = useState([]);
   const [patientData1, setPatientData1] = useState([]);
   const [patientData2, setPatientData2] = useState([]);
 
-  const fetchData = (patientIdx) => {
+  const fetchData = (patientId) => {
     axios
       .get("https://server.medicassol.info/doctor/patient/history", {
         params: {
-          patientIdx: patientIdx,
+          patientIdx: patientId,
           option: 2,
         },
         headers: {
@@ -99,7 +99,7 @@ function Page2() {
     axios
       .get("https://server.medicassol.info/doctor/patient/history", {
         params: {
-          patientIdx: patientIdx,
+          patientIdx: patientId,
           option: 1,
         },
         headers: {
@@ -116,7 +116,7 @@ function Page2() {
       });
   };
   useEffect(() => {
-    fetchData(1);
+    fetchData(patientId);
   }, []);
 
   return (
@@ -135,6 +135,7 @@ function Page2() {
           show={showModal}
           setTableData={setTableData}
           tableData={tableData}
+          patientId={patientId}
         />
       </div>
 

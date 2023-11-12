@@ -12,16 +12,16 @@ const response = {
   status: "200",
 };
 
-function Page1() {
+function Page1({patientId}) {
   const [postedMessages, setPostedMessages] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
-  const fetchMessages = (patientIdx) => {
+  const fetchMessages = (patientId) => {
     axios
       .get(
         "https://server.medicassol.info/doctor/message",
         {
-          params: { patientIdx:  1},
+          params: { patientIdx:  patientId},
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${response.tokens.accessToken}`,
@@ -39,7 +39,7 @@ function Page1() {
 
   // 컴포넌트 마운트 시 데이터 로드
   useEffect(() => {
-    fetchMessages(1);
+    fetchMessages(patientId);
   }, []);
 
   const handlePostMessage = (message) => {
@@ -88,6 +88,7 @@ function Page1() {
             onClose={handleCloseModal}
             onSubmit={handlePostMessage}
             onInputChange={handleModalInputChange}
+            patientId={patientId}
           />
         )}
 
